@@ -25,13 +25,17 @@ let data = {
 function createTree(container, obj) {
   container.append(createTreeDom(obj));
 }
-
+console.log(data)
 function createTreeDom(obj) {
   if (!Object.keys(obj).length) return;
 
   let ul = document.createElement('ul');
-  let img = document.createElement('img');
   ul.className = 'tree-ul';
+
+  let img = document.createElement('img');
+  img.className = 'tree-img';
+  img.src = './folder-black-18dp.svg'
+
   ul.append(img);
 
   for (let key in obj) {
@@ -44,13 +48,11 @@ function createTreeDom(obj) {
     if (childUl) {
       li.append(childUl);
     }
-
     ul.append(li);
   }
-  img.className = 'tree-img';
-  img.src = './folder-black-18dp.svg'
   return ul;
 }
+
 
 let container = document.getElementById('container');
 
@@ -61,9 +63,14 @@ tree = document.getElementById('container');
 
 for (let li of tree.querySelectorAll('li')) {
   let span = document.createElement('span');
+  let img = document.createElement('img');
+  img.className = 'tree-img';
+  img.src = './folder-black-18dp.svg';
   li.prepend(span);
+  li.prepend(img);
   span.append(span.nextSibling); 
 }
+
 tree.onclick = function(event) {
 
   if (event.target.tagName != 'SPAN') return;
